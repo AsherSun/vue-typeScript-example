@@ -1,24 +1,26 @@
-// import * as types from './mutation_types';
+import * as types from '@/store/mutation_types';
 import { GetterTree, ActionTree, MutationTree} from 'vuex';
-import * as ajaxs from '@/api/main.ts';
+import * as ajaxs from '@/api/index.ts';
 const state: IndexStore.State = {
-  navMenu: {
-    code: 0,
-    message: '',
-    data: [],
+  navMenu: [],
+}
+
+const mutations: MutationTree<any> = {
+  [types.GET_NAV_MENU](state, data) {
+    state.navMenu = data
   },
 }
-const mutations: MutationTree<any> = {}
 const actions: ActionTree<any, any> = {
   async initAjax({ dispatch }) {
     dispatch('getNavMenu')
   },
-  async getNavMenu({ commit }) {
+  async getNavMenu({state, commit }) {
     const { data }: Ajax.AxiosResponse = await ajaxs.getNavMenuList()
-    if (data.code) { state.navMenu = data }
+    if (data.code) { commit(types.GET_NAV_MENU, data.data) }
   },
 }
 const getters: GetterTree<any, any> = {}
+
 export default {
   state,
   mutations,

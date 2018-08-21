@@ -1,12 +1,10 @@
 declare namespace IndexStore {
-  
-  export interface State {
-    navMenu: navMenu
+  export interface NavMenu {
+    [index: number]: object
   }
 
-  export interface navMenu {
-    code: number,
-    message?: string,
-    data: []
+  export interface State {
+    navMenu: NavMenu
   }
+  
 }
