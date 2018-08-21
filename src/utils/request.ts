@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 // import Vue from 'vue';
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.BASE_API,
   timeout: 25000,
 });
 
@@ -16,7 +16,7 @@ service.interceptors.response.use((response: AxiosResponse<any>) => {
   if (res.code !== 200) {
     return Promise.reject(res)
   }
-  return response.data
+  return response
 }, (error: AxiosResponse<any>) => {
   return Promise.reject(error)
 });
